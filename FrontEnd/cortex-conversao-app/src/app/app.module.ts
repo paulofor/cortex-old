@@ -19,9 +19,9 @@ import {MatTableModule} from '@angular/material/table';
 import { HttpClient, HttpResponse, HttpClientModule } from '@angular/common/http';
 import { SocketConnection } from './shared/sdk/sockets/socket.connections';
 import { SocketDriver } from './shared/sdk/sockets/socket.driver';
-import { SDKModels } from './shared/sdk/services/custom/SDKModels';
-import { LoopBackAuth } from './shared/sdk/services/core/auth.service';
-import { InternalStorage } from './shared/sdk/storage/storage.swaps';
+import { SDKModels, LoopBackAuth, ConversorApi, SDKBrowserModule } from './shared/sdk';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -32,14 +32,14 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     BrowserModule,
     AppRoutingModule,
     //FormsModule,
-    //HttpClientModule ,
+    HttpClientModule ,
     MatDialogModule,
     BrowserAnimationsModule,
-    //MatFormFieldModule,
+    MatFormFieldModule,
     //MatInputModule,
     //MatButtonModule,
 
-    //SDKBrowserModule.forRoot(),
+    SDKBrowserModule.forRoot(),
     MatExpansionModule,
     MatListModule,
     MatTabsModule,
@@ -60,7 +60,9 @@ import { InternalStorage } from './shared/sdk/storage/storage.swaps';
     SocketDriver,
     SDKModels,
     LoopBackAuth,
-    { provide: LOCALE_ID, useValue: 'pt-BR' } 
+
+    { provide: LOCALE_ID, useValue: 'pt-BR' } ,
+    ConversorApi
 
   ],
   bootstrap: [AppComponent]

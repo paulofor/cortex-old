@@ -4,6 +4,21 @@
 
   <mat-dialog-content>
 
+    
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Moeda Origem" #moedaOrigem [(ngModel)]="conversor.moedaOrigem" name="moedaOrigem">
+        <mat-option value="USD">Dólar</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--
+    <mat-form-field class="example-full-width">
+      <mat-select placeholder="Moeda Final" #moedaFinal [(ngModel)]="conversor.moedaFinal" name="moedaFinal">
+        <mat-option value="USD">Dólar</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+      </mat-select>
+    </mat-form-field>
+    -->
 
   </mat-dialog-content>
 

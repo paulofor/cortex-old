@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Conversor, ConversorApi } from '../shared/sdk';
 
 @Component({
   selector: 'app-conversor-moeda-bc',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversorMoedaBcComponent implements OnInit {
 
-  constructor() { }
+
+  conversor : Conversor;
+
+  constructor(private conversorSrv : ConversorApi) { }
 
   ngOnInit() {
+  }
+
+  onSubmit() {
+    console.log('conversor' , this.conversor);
   }
 
 }
