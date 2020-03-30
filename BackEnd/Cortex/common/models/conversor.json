@@ -1,0 +1,114 @@
+{
+  "name": "Conversor",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "moedaOrigem": {
+      "type": "string",
+      "id": "true"
+    },
+    "moedaFinal": {
+      "type": "string",
+      "id": "true"
+    },
+    "valorDesejado": {
+      "type": "number",
+      "id": "true"
+    },
+    "dataCotacao": {
+      "type": "string",
+      "id" : "true"
+    },
+    "totalPrecoCompra" : {
+      "type" : "number"
+    },
+    "totalPrecoVenda" : {
+      "type" : "number"
+    },
+    "dataHoraCriacao" : {
+      "type" : "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "realizaConversao": {
+      "accepts": [
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": true,
+          "description": "Data da cotação que se deseja consultar"
+        },
+        {
+          "arg": "moedaOrigem",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja converter"
+        },
+        {
+          "arg": "moedaFinal",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja obter convertida"
+        },
+        {
+          "arg": "valorDesejado",
+          "type": "number",
+          "required": true,
+          "description": "Valor para a conversão"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "conversao",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da conversão solicitada"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/realizaConversao",
+          "verb": "get"
+        }
+      ]
+    },
+    "ConsultaBc": {
+      "accepts": [
+        {
+          "arg": "codigoMoeda",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "returns": [
+        {
+          "arg": "retornoBc",
+          "type": "object",
+          "root": true,
+          "description": "Retorno da API do Banco Central"
+        }
+      ],
+      "description": "Realiza a consulta para a api do Banco Central",
+      "http": [
+        {
+          "path": "/consultaBc",
+          "verb": "get"
+        }
+      ]
+    }
+  }
+}
