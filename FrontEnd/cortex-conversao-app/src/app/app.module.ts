@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ConversorMoedaBcComponent } from './conversor-moeda-bc/conversor-moeda-bc.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { ConversorMoedaBcComponent } from './conversor-moeda-bc/conversor-moeda-
     ConversorMoedaBcComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
