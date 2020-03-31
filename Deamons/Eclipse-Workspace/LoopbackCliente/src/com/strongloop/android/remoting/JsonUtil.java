@@ -13,7 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import br.com.digicom.modelo.ItemListaLoopback;
+//import br.com.digicom.modelo.ItemListaLoopback;
 
 /**
  * Utility methods for converting JSON objects to Java collection objects

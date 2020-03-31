@@ -14,14 +14,7 @@ import com.strongloop.android.loopback.callbacks.ObjectCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
-import br.com.digicom.modelo.AnuncioAplicacaoResultado;
-import br.com.digicom.modelo.CampanhaAds;
-import br.com.digicom.modelo.CampanhaAnuncioResultado;
-import br.com.digicom.modelo.CampanhaPalavraChaveResultado;
-import br.com.digicom.modelo.DispositivoUsuario;
-import br.com.digicom.modelo.NotificacaoApp;
-import br.com.digicom.modelo.PalavraChaveEstatistica;
-import br.com.digicom.modelo.PalavraChaveRaiz;
+
 
 public class RepositorioBase {
 

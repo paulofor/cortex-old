@@ -5,8 +5,8 @@ import com.strongloop.android.remoting.Repository;
 import com.strongloop.android.remoting.VirtualObject;
 import com.strongloop.android.remoting.adapters.Adapter;
 
-import br.com.digicom.modelo.repositorio.RepositorioBase.CampanhaAdRepository;
-import br.com.digicom.modelo.util.ListaCampanha;
+
+//import br.com.digicom.modelo.util.ListaCampanha;
 
 import org.json.JSONObject;
 

@@ -16,7 +16,7 @@ public class LimpaCacheApp {
 	private static Repository repositorio;
 
 	public static void main(String[] args) {
-		System.out.println("Ola Mundo");
+		System.out.println("Inicializa limpeza de cache");
 		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21040/api");
 		RepositorioBase.ConversorRepository rep = adapter.createRepository(RepositorioBase.ConversorRepository.class);
 		
