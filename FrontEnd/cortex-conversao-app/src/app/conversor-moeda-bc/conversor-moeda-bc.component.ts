@@ -9,15 +9,37 @@ import { Conversor, ConversorApi } from '../shared/sdk';
 export class ConversorMoedaBcComponent implements OnInit {
 
 
-  conversor : Conversor;
+  conversor: Conversor;
+  dataParaCotacao: Date = new Date();
 
-  constructor(private conversorSrv : ConversorApi) { }
+  conversorResultado : Conversor;
+
+  constructor(private conversorSrv: ConversorApi) { }
 
   ngOnInit() {
+    this.conversor = new Conversor();
+
   }
 
   onSubmit() {
-    console.log('conversor' , this.conversor);
+    console.log('conversor', this.conversor);
+    console.log('Data: ', this.dataParaCotacao);
+    var dataFormatada = ("0" + this.dataParaCotacao.getDate()).substr(-2) + "-"
+      + ("0" + (this.dataParaCotacao.getMonth() + 1)).substr(-2) + "-" + this.dataParaCotacao.getFullYear();
+    console.log('dataFormatada: ' , dataFormatada );
+    var moedaOrigem = this.conversor.moedaOrigem;
+    var moedaFinal = this.conversor.moedaFinal;
+    var valorDesejado = this.conversor.valorDesejado;
+    this.conversorSrv.realizaConversao(dataFormatada,moedaOrigem,moedaFinal,valorDesejado)
+      .subscribe((result) => {
+        console.log('ResultadoConsulta: ' , result);
+        this.conversorResultado = new Conversor();
+        this.conversorResultado.totalPrecoCompra = result.totalPrecoCompra;
+        this.conversorResultado.totalPrecoVenda = result.totalPrecoVenda;
+        this.conversorResultado['cache'] = result.cache;
+      })
   }
+
+
 
 }

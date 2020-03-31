@@ -2,29 +2,55 @@
 
 <form class="example-full-width" (ngSubmit)="onSubmit()">
 
-  <mat-dialog-content>
+  <mat-dialog-content *ngIf="conversor">
 
-    
+
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Moeda Origem" #moedaOrigem [(ngModel)]="conversor.moedaOrigem" name="moedaOrigem">
         <mat-option value="USD">Dólar</mat-option>
         <mat-option value="EUR">Euro</mat-option>
       </mat-select>
     </mat-form-field>
-    <!--
+
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Moeda Final" #moedaFinal [(ngModel)]="conversor.moedaFinal" name="moedaFinal">
         <mat-option value="USD">Dólar</mat-option>
         <mat-option value="EUR">Euro</mat-option>
       </mat-select>
     </mat-form-field>
-    -->
+
+
+    <mat-form-field class="example-full-width">
+      <input matInput maxlength="10" #valorDesejado [(ngModel)]="conversor.valorDesejado" name="valorDesejado"
+        placeholder="Valor para conversão" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Data para conversão" [(ngModel)]="dataParaCotacao"
+        #dataCotacao name="dataCotacao">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
   </mat-dialog-content>
-
+  <br>
   <mat-dialog-actions>
-    <button mat-raised-button>Salvar</button>
-    <button mat-raised-button mat-dialog-close>Fechar</button>
+    <button mat-raised-button>Enviar</button>
   </mat-dialog-actions>
 
 </form>
+
+<table *ngIf="conversorResultado">
+  <tr>
+    <td>Valor para compra</td>
+    <td>{{conversorResultado.totalPrecoCompra  | number : '1.2-2' }}</td>
+  </tr>
+  <tr>
+    <td>Valor para venda</td>
+    <td>{{conversorResultado.totalPrecoVenda  | number : '1.2-2' }}</td>
+  </tr>
+  <tr>
+    <td>Usou cache</td>
+    <td>{{conversorResultado.cache}}</td>
+  </tr>
+</table>

@@ -15,13 +15,18 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatAutocompleteModule, MatCheckboxModule, MatNativeDateModule } from '@angular/material';
+
 
 import { HttpClient, HttpResponse, HttpClientModule } from '@angular/common/http';
 import { SocketConnection } from './shared/sdk/sockets/socket.connections';
 import { SocketDriver } from './shared/sdk/sockets/socket.driver';
 import { SDKModels, LoopBackAuth, ConversorApi, SDKBrowserModule } from './shared/sdk';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 
+registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
@@ -31,14 +36,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //FormsModule,
+    FormsModule,
     HttpClientModule ,
     MatDialogModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    //MatInputModule,
-    //MatButtonModule,
-
+    MatInputModule,
+    MatButtonModule,
+    //NgxImgModule.forRoot(),
+    //FileDropModule,
+    //UploadModule,
+    //ImageUploadModule.forRoot(),
+    //NgDragDropModule.forRoot(),
     SDKBrowserModule.forRoot(),
     MatExpansionModule,
     MatListModule,
@@ -48,11 +57,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSelectModule,
     MatSlideToggleModule,
     MatTableModule,
-    //MatAutocompleteModule,
-    //ReactiveFormsModule,
-    //MatCheckboxModule,
-    //FormsModule,
-    //MatButtonModule
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    //MatMomentDateModule
   ],
   providers: [
     HttpClient, 

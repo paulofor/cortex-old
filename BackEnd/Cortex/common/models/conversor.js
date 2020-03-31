@@ -6,15 +6,34 @@ module.exports = function (Conversor) {
 
 
 
-    /**
- * 
- * @param {string} dataCotacao Data da cotação que se deseja consultar
- * @param {string} moedaOrigem Codigo da moeda que deseja converter
- * @param {string} moedaFinal Codigo da moeda que deseja obter convertida
- * @param {number} valorDesejado Valor para a conversão
- * @param {Function(Error, object)} callback
- */
 
+
+    /**
+     * Realiza a limpeza de cache
+     * @param {number} tempoMinutos Tempo em minutos para manter cache ativo
+     * @param {Function(Error, object)} callback
+     */
+    Conversor.LimpaCache = function (tempoMinutos, callback) {
+        var sql =
+            " delete from Conversor " +
+            " where dataHoraCriacao < " +
+            " ( SELECT DATE_SUB(UTC_TIMESTAMP(), INTERVAL " + tempoMinutos + " MINUTE) )";
+        var ds = Conversor.dataSource;
+        ds.connector.query(sql, (err, result) => {
+            callback(err, result);
+        });
+    };
+
+
+
+    /**
+    * 
+    * @param {string} dataCotacao Data da cotação que se deseja consultar
+    * @param {string} moedaOrigem Codigo da moeda que deseja converter
+    * @param {string} moedaFinal Codigo da moeda que deseja obter convertida
+    * @param {number} valorDesejado Valor para a conversão
+    * @param {Function(Error, object)} callback
+    */
     Conversor.realizaConversao = function (dataCotacao, moedaOrigem, moedaFinal, valorDesejado, callback) {
 
         let filtro = {
@@ -23,7 +42,7 @@ module.exports = function (Conversor) {
                     [
                         { "moedaOrigem": moedaOrigem },
                         { "moedaFinal": moedaFinal },
-                        { "dataCotacao" : dataCotacao },
+                        { "dataCotacao": dataCotacao },
                         { "valorDesejado": valorDesejado }
                     ]
             }
@@ -51,7 +70,7 @@ module.exports = function (Conversor) {
     function trataRealFinal(dataCotacao, moedaOrigem, moedaFinal, valorDesejado, callback) {
         Conversor.ConsultaBc(moedaOrigem, dataCotacao, (err, result) => {
             console.log('ConsultaBc - err: ', err);
-            if (result.value.length==0) {
+            if (result.value.length == 0) {
                 callback('sem cotação na data', null);
                 return;
             }
@@ -79,7 +98,7 @@ module.exports = function (Conversor) {
 
     function trataRealOrigem(dataCotacao, moedaOrigem, moedaFinal, valorDesejado, callback) {
         Conversor.ConsultaBc(moedaFinal, dataCotacao, (err, result) => {
-            if (result.value.length==0) {
+            if (result.value.length == 0) {
                 callback('sem cotação na data', null);
                 return;
             }
@@ -87,8 +106,8 @@ module.exports = function (Conversor) {
             // obtendo cotações de fechamento
             let fechamento = result.value[result.value.length - 1];
             // calculando valor desejado
-            let totalCompra = valorDesejado * (1/fechamento.cotacaoCompra);
-            let totalVenda = valorDesejado * (1/fechamento.cotacaoVenda);
+            let totalCompra = valorDesejado * (1 / fechamento.cotacaoCompra);
+            let totalVenda = valorDesejado * (1 / fechamento.cotacaoVenda);
             let objetoCache =
             {
                 'dataCotacao': dataCotacao,
@@ -112,7 +131,7 @@ module.exports = function (Conversor) {
         // Obtendo referencia ao Real da moedaFinal
         Conversor.ConsultaBc(moedaFinal, dataCotacao, (err, result) => {
 
-            if (result.value.length==0) {
+            if (result.value.length == 0) {
                 callback('sem cotação na data', null);
                 return;
             }
@@ -161,13 +180,13 @@ module.exports = function (Conversor) {
         //let mes = objetoCache.dataCotacao.substring(3, 5);
         //let ano = objetoCache.dataCotacao.substring(6);
         //objetoCache.dataCotacao = formataDataDB(objetoCache.dataCotacao);
-        
+
         console.log('Objeto Cache');
         objetoCache["dataHoraCriacao"] = new Date()
 
         Conversor.create(objetoCache, (err, result) => {
-            console.log('Err: ' , err);
-            console.log('Resutl: ' , result);
+            console.log('Err: ', err);
+            console.log('Resutl: ', result);
         });
     }
 
@@ -198,7 +217,7 @@ module.exports = function (Conversor) {
             + codigoMoeda + '%27&%40dataCotacao=%27' + dataCotacaoBc + '%27&%24format=json';
 
         request.get(urlConsultaBc, (err, response, body) => {
-            console.log('body' , body);
+            console.log('body', body);
             callback(err, JSON.parse(body));
         });
 

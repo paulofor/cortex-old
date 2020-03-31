@@ -20,16 +20,16 @@
     },
     "dataCotacao": {
       "type": "string",
-      "id" : "true"
+      "id": "true"
     },
-    "totalPrecoCompra" : {
-      "type" : "number"
+    "totalPrecoCompra": {
+      "type": "number"
     },
-    "totalPrecoVenda" : {
-      "type" : "number"
+    "totalPrecoVenda": {
+      "type": "number"
     },
-    "dataHoraCriacao" : {
-      "type" : "date"
+    "dataHoraCriacao": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -107,6 +107,31 @@
         {
           "path": "/consultaBc",
           "verb": "get"
+        }
+      ]
+    },
+    "LimpaCache": {
+      "accepts": [
+        {
+          "arg": "tempoMinutos",
+          "type": "number",
+          "required": true,
+          "description": "Tempo em minutos para manter cache ativo"
+        }
+      ],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da limpeza feita"
+        }
+      ],
+      "description": "Realiza a limpeza de cache",
+      "http": [
+        {
+          "path": "/limpaCache",
+          "verb": "post"
         }
       ]
     }
