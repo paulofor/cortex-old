@@ -6,7 +6,16 @@ module.exports = function (Conversor) {
 
 
 
-
+    /**
+    * Converte o primeiro item da fila de processamento
+    * @param {Function(Error, object)} callback
+    */
+    Conversor.ConverteProximoFila = function(callback) {
+        var resultado;
+        // TODO
+        callback(null, resultado);
+    };
+  
 
     /**
      * Realiza a limpeza de cache
@@ -23,6 +32,34 @@ module.exports = function (Conversor) {
             callback(err, result);
         });
     };
+
+    /**
+    * 
+    * @param {string} dataCotacao Data da cotação que se deseja consultar
+    * @param {string} moedaOrigem Codigo da moeda que deseja converter
+    * @param {string} moedaFinal Codigo da moeda que deseja obter convertida
+    * @param {number} valorDesejado Valor para a conversão
+    * @param {Function(Error, object)} callback
+    */
+    Conversor.realizaConversaoFila = function (dataCotacao, moedaOrigem, moedaFinal, valorDesejado, prioridade, callback) {
+        var sql;
+        if (prioridade==0) {
+            // sem prioridade, posicionada no final da fila de processamento
+            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
+                " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + formataDataDB(dataCotacao) + "' , ((select max(posicao) + 1 from FilaConversor)) ";
+        } else {
+            // com prioridade, posicionada no inicio da fila de processamento
+            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
+            " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + formataDataDB(dataCotacao) + "' , ((select min(posicao) - 1 from FilaConversor)) ";
+
+        }
+
+        var ds = Conversor.dataSource;
+        ds.connector.query(sql, (err,result) => {
+            callback(err,result);
+        })
+    }
+
 
 
 
@@ -190,14 +227,14 @@ module.exports = function (Conversor) {
         });
     }
 
-    /*
+    
     function formataDataDB(dataNormal) {
         let dia = dataNormal.substring(0, 2);
         let mes = dataNormal.substring(3, 5);
         let ano = dataNormal.substring(6);
         return ano + '-' + mes + '-' + dia;
     }
-    */
+    
 
     /**
      * Realiza a consulta para a api do Banco Central

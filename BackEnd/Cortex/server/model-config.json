@@ -38,5 +38,9 @@
   "Conversor": {
     "dataSource": "mysqlDS",
     "public": true
+  },
+  "FilaConversor": {
+    "dataSource": "mysqlDS",
+    "public": true
   }
 }

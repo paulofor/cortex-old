@@ -1,0 +1,22 @@
+{
+  "name": "FilaConversor",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "posicao": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "conversor": {
+      "type": "belongsTo",
+      "model": "Conversor"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

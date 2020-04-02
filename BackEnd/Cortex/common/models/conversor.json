@@ -7,20 +7,16 @@
   },
   "properties": {
     "moedaOrigem": {
-      "type": "string",
-      "id": "true"
+      "type": "string"
     },
     "moedaFinal": {
-      "type": "string",
-      "id": "true"
+      "type": "string"
     },
     "valorDesejado": {
-      "type": "number",
-      "id": "true"
+      "type": "number"
     },
     "dataCotacao": {
-      "type": "string",
-      "id": "true"
+      "type": "string"
     },
     "totalPrecoCompra": {
       "type": "number"
@@ -33,7 +29,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "filaConversor": {
+      "type": "hasMany",
+      "model": "FilaConversor",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {
     "realizaConversao": {
@@ -68,13 +70,62 @@
           "arg": "conversao",
           "type": "object",
           "root": true,
-          "description": "Resultado da conversão solicitada"
+          "description": "Resultado da conversão solicitada com processamento em fila"
         }
       ],
       "description": "",
       "http": [
         {
           "path": "/realizaConversao",
+          "verb": "get"
+        }
+      ]
+    },
+    "realizaConversaoFila": {
+      "accepts": [
+        {
+          "arg": "dataCotacao",
+          "type": "string",
+          "required": true,
+          "description": "Data da cotação que se deseja consultar"
+        },
+        {
+          "arg": "moedaOrigem",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja converter"
+        },
+        {
+          "arg": "moedaFinal",
+          "type": "string",
+          "required": true,
+          "description": "Codigo da moeda que deseja obter convertida"
+        },
+        {
+          "arg": "valorDesejado",
+          "type": "number",
+          "required": true,
+          "description": "Valor para a conversão"
+        },
+        {
+          "arg": "prioridade",
+          "type": "number",
+          "required": true,
+          "description": "Identifica se essa consulta vai assumir a primeira posição na fila (0-fila normal, 1-fila prioritária) "
+        }
+      ],
+      "returns": [
+        {
+          "arg": "conversao",
+          "type": "object",
+          "root": true,
+          "description": "Resultado da conversão solicitada"
+        }
+      ],
+      "description": "",
+      "http": [
+        {
+          "path": "/realizaConversaoFila",
           "verb": "get"
         }
       ]
@@ -132,6 +183,24 @@
         {
           "path": "/limpaCache",
           "verb": "post"
+        }
+      ]
+    },
+    "ConverteProximoFila": {
+      "accepts": [],
+      "returns": [
+        {
+          "arg": "resultado",
+          "type": "object",
+          "root": true,
+          "description": "Resultado do processamento"
+        }
+      ],
+      "description": "Converte o primeiro item da fila de processamento",
+      "http": [
+        {
+          "path": "/converteProximoFila",
+          "verb": "get"
         }
       ]
     }

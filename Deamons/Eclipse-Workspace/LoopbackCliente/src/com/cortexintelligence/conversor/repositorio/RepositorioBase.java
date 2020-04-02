@@ -29,7 +29,7 @@ public class RepositorioBase {
 		}
 
 		public void limpaCache(int minutos, final VoidCallback callback) {
-			RestContractItem contrato = new RestContractItem("Conversors/limpaCache", "GET");
+			RestContractItem contrato = new RestContractItem("Conversors/limpaCache", "POST");
 			this.getRestAdapter().getContract().addItem(contrato, "Conversor.limpaCache");
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("tempoMinutos", minutos);
