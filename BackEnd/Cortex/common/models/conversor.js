@@ -13,12 +13,23 @@ module.exports = function (Conversor) {
     */
     Conversor.ConverteProximoFila = function(callback) {
         var filaSrv = app.models.FilaConversor;
-        filaSrv.findOne({'order' : 'posicao'}, (err,result) => {
-            if (result) {
-
+        filaSrv.findOne({'order' : 'posicao'}, (err,itemFila) => {
+            if (itemFila) {
+                console.log('Result: ' , itemFila);
+                Conversor.realizaConversao(itemFila.dataCotacao, itemFila.moedaOrigem, itemFila.moedaFinal, itemFila.valorDesejado, (err, result) => {
+                    if (err) {
+                        callback(err,null);
+                    }
+                    if (result) {
+                        filaSrv.destroyById(itemFila.id, (err,result) => {
+                            console.log('Erro: ' ,  err);
+                            console.log('Result: ' , result);
+                        });
+                        callback(null,result);
+                    }
+                })
             }
         })
-        callback(null, resultado);
     };
   
 
@@ -51,11 +62,11 @@ module.exports = function (Conversor) {
         if (prioridade==0) {
             // sem prioridade, posicionada no final da fila de processamento
             sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
-                " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + formataDataDB(dataCotacao) + "' , ((select max(posicao) + 1 from FilaConversor)) ";
+                " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select max(posicao) + 1 from FilaConversor)) ";
         } else {
             // com prioridade, posicionada no inicio da fila de processamento
             sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
-            " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + formataDataDB(dataCotacao) + "' , ((select min(posicao) - 1 from FilaConversor)) ";
+            " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select min(posicao) - 1 from FilaConversor)) ";
 
         }
 
