@@ -8,6 +8,18 @@
   "properties": {
     "posicao": {
       "type": "number"
+    },
+    "moedaOrigem": {
+      "type": "string"
+    },
+    "moedaFinal": {
+      "type": "string"
+    },
+    "valorDesejado": {
+      "type": "number"
+    },
+    "dataCotacao": {
+      "type": "string"
     }
   },
   "validations": [],

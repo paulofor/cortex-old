@@ -1,6 +1,7 @@
 'use strict';
 
 var request = require('request');
+var app = require('../../server/server');
 
 module.exports = function (Conversor) {
 
@@ -11,8 +12,12 @@ module.exports = function (Conversor) {
     * @param {Function(Error, object)} callback
     */
     Conversor.ConverteProximoFila = function(callback) {
-        var resultado;
-        // TODO
+        var filaSrv = app.models.FilaConversor;
+        filaSrv.findOne({'order' : 'posicao'}, (err,result) => {
+            if (result) {
+
+            }
+        })
         callback(null, resultado);
     };
   

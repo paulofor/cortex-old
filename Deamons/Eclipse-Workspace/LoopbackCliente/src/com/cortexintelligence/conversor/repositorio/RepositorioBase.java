@@ -35,6 +35,18 @@ public class RepositorioBase {
 			params.put("tempoMinutos", minutos);
 			invokeStaticMethod("limpaCache", params, new EmptyResponseParser(callback));
 		}
+		
+		public void realizaConversaoFila(String moedaOrigem, String moedaFinal, float valorDesejado, String dataCotacao, int prioridade, final VoidCallback callback) {
+			RestContractItem contrato = new RestContractItem("Conversors/realizaConversaoFila", "GET");
+			this.getRestAdapter().getContract().addItem(contrato, "Conversor.realizaConversaoFila");
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("moedaOrigem", moedaOrigem);
+			params.put("moedaFinal", moedaFinal);
+			params.put("valorDesejado", valorDesejado);
+			params.put("dataCotacao", dataCotacao);
+			params.put("prioridade", prioridade);
+			invokeStaticMethod("realizaConversaoFila", params, new EmptyResponseParser(callback));
+		}
 	}
 
 }
