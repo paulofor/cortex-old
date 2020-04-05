@@ -47,6 +47,15 @@ public class RepositorioBase {
 			params.put("prioridade", prioridade);
 			invokeStaticMethod("realizaConversaoFila", params, new EmptyResponseParser(callback));
 		}
+		
+
+		public void converteProximoFila(final ObjectCallback<Conversor> callback) {
+			RestContractItem contrato = new RestContractItem("Conversors/converteProximoFila","GET");
+			this.getRestAdapter().getContract().addItem(contrato, "Conversor.converteProximoFila");
+		    Map<String, Object> params = new HashMap<String, Object>();
+		    invokeStaticMethod("converteProximoFila", params,   new JsonObjectParser<Conversor>(this, callback));
+		}
+		
 	}
 
 }
