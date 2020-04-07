@@ -11,7 +11,6 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Conversor } from '../../models/Conversor';
 import { SocketConnection } from '../../sockets/socket.connections';
-import { FilaConversor } from '../../models/FilaConversor';
 
 
 /**
@@ -28,215 +27,6 @@ export class ConversorApi extends BaseLoopBackApi {
     @Optional() @Inject(ErrorHandler) protected errorHandler: ErrorHandler
   ) {
     super(http,  connection,  models, auth, errorHandler);
-  }
-
-  /**
-   * Localize um item relacionado por ID para filaConversor.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {any} fk Chave estrangeira para filaConversor
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Conversor` object.)
-   * </em>
-   */
-  public findByIdFilaConversor(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Excluir um item relacionado por ID para filaConversor.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {any} fk Chave estrangeira para filaConversor
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public destroyByIdFilaConversor(id: any, fk: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Atualizar um item relacionado por ID para filaConversor.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {any} fk Chave estrangeira para filaConversor
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Conversor` object.)
-   * </em>
-   */
-  public updateByIdFilaConversor(id: any, fk: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "PUT";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor/:fk";
-    let _routeParams: any = {
-      id: id,
-      fk: fk
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * filaConversor consultas de Conversor.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {object} filter 
-   *
-   * @returns {object[]} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Conversor` object.)
-   * </em>
-   */
-  public getFilaConversor(id: any, filter: LoopBackFilter = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof filter !== 'undefined' && filter !== null) _urlParams.filter = filter;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Cria uma nova instância no filaConversor deste modelo.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Conversor` object.)
-   * </em>
-   */
-  public createFilaConversor(id: any, data: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * Exclui todos os filaConversor deste modelo.
-   *
-   * @param {any} id Conversor id
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * This method returns no data.
-   */
-  public deleteFilaConversor(id: any, customHeaders?: Function): Observable<any> {
-    let _method: string = "DELETE";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
-  }
-
-  /**
-   * filaConversor contagens de Conversor.
-   *
-   * @param {any} id Conversor id
-   *
-   * @param {object} where Criteria to match model instances
-   *
-   * @returns {object} An empty reference that will be
-   *   populated with the actual data once the response is returned
-   *   from the server.
-   *
-   * Data properties:
-   *
-   *  - `count` – `{number}` - 
-   */
-  public countFilaConversor(id: any, where: any = {}, customHeaders?: Function): Observable<any> {
-    let _method: string = "GET";
-    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor/count";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {};
-    let _urlParams: any = {};
-    if (typeof where !== 'undefined' && where !== null) _urlParams.where = where;
-    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
-    return result;
   }
 
   /**
@@ -318,7 +108,7 @@ export class ConversorApi extends BaseLoopBackApi {
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * Resultado da conversão solicitada
+   * Resultado da conversão solicitada com processamento em fila
    */
   public realizaConversao(dataCotacao: any, moedaOrigem: any, moedaFinal: any, valorDesejado: any, customHeaders?: Function): Observable<any> {
     let _method: string = "GET";
@@ -331,6 +121,43 @@ export class ConversorApi extends BaseLoopBackApi {
     if (typeof moedaOrigem !== 'undefined' && moedaOrigem !== null) _urlParams.moedaOrigem = moedaOrigem;
     if (typeof moedaFinal !== 'undefined' && moedaFinal !== null) _urlParams.moedaFinal = moedaFinal;
     if (typeof valorDesejado !== 'undefined' && valorDesejado !== null) _urlParams.valorDesejado = valorDesejado;
+    let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
+    return result;
+  }
+
+  /**
+   * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+   *
+   * @param {string} dataCotacao Data da cotação que se deseja consultar
+   *
+   * @param {string} moedaOrigem Codigo da moeda que deseja converter
+   *
+   * @param {string} moedaFinal Codigo da moeda que deseja obter convertida
+   *
+   * @param {number} valorDesejado Valor para a conversão
+   *
+   * @param {number} prioridade Identifica se essa consulta vai assumir a primeira posição na fila (0-fila normal, 1-fila prioritária) 
+   *
+   * @returns {object} An empty reference that will be
+   *   populated with the actual data once the response is returned
+   *   from the server.
+   *
+   * Resultado da conversão solicitada
+   */
+  public realizaConversaoFila(dataCotacao: any, moedaOrigem: any, moedaFinal: any, valorDesejado: any, prioridade: any, customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
+    let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
+    "/Conversors/realizaConversaoFila";
+    let _routeParams: any = {};
+    let _postBody: any = {};
+    let _urlParams: any = {};
+    if (typeof dataCotacao !== 'undefined' && dataCotacao !== null) _urlParams.dataCotacao = dataCotacao;
+    if (typeof moedaOrigem !== 'undefined' && moedaOrigem !== null) _urlParams.moedaOrigem = moedaOrigem;
+    if (typeof moedaFinal !== 'undefined' && moedaFinal !== null) _urlParams.moedaFinal = moedaFinal;
+    if (typeof valorDesejado !== 'undefined' && valorDesejado !== null) _urlParams.valorDesejado = valorDesejado;
+    if (typeof prioridade !== 'undefined' && prioridade !== null) _urlParams.prioridade = prioridade;
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;
   }
@@ -387,33 +214,20 @@ export class ConversorApi extends BaseLoopBackApi {
   }
 
   /**
-   * Cria uma nova instância no filaConversor deste modelo.
+   * Converte o primeiro item da fila de processamento
    *
-   * @param {any} id Conversor id
-   *
-   * @param {object} data Request data.
-   *
-   * This method expects a subset of model properties as request parameters.
-   *
-   * @returns {object[]} An empty reference that will be
+   * @returns {object} An empty reference that will be
    *   populated with the actual data once the response is returned
    *   from the server.
    *
-   * <em>
-   * (The remote method definition does not provide any description.
-   * This usually means the response is a `Conversor` object.)
-   * </em>
+   * Resultado do processamento
    */
-  public createManyFilaConversor(id: any, data: any[] = [], customHeaders?: Function): Observable<any> {
-    let _method: string = "POST";
+  public ConverteProximoFila(customHeaders?: Function): Observable<any> {
+    let _method: string = "GET";
     let _url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-    "/Conversors/:id/filaConversor";
-    let _routeParams: any = {
-      id: id
-    };
-    let _postBody: any = {
-      data: data
-    };
+    "/Conversors/converteProximoFila";
+    let _routeParams: any = {};
+    let _postBody: any = {};
     let _urlParams: any = {};
     let result = this.request(_method, _url, _routeParams, _urlParams, _postBody, null, customHeaders);
     return result;

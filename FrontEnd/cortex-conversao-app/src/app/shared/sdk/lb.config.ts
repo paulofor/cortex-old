@@ -20,7 +20,7 @@
 * }
 **/
 export class LoopBackConfig {
-  private static path: string = '//0.0.0.0:21040';
+  private static path: string = 'https://www.digicom.inf.br:21040';
   private static version: string | number = 'api';
   private static authPrefix: string = '';
   private static debug: boolean = true;

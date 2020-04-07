@@ -1,21 +1,24 @@
 /* tslint:disable */
-import {
-  Conversor
-} from '../index';
 
 declare var Object: any;
 export interface FilaConversorInterface {
   "posicao"?: number;
+  "moedaOrigem"?: string;
+  "moedaFinal"?: string;
+  "valorDesejado"?: number;
+  "dataCotacao"?: string;
+  "dataHoraCriacao"?: Date;
   "id"?: number;
-  "conversorId"?: number;
-  conversor?: Conversor;
 }
 
 export class FilaConversor implements FilaConversorInterface {
   "posicao": number;
+  "moedaOrigem": string;
+  "moedaFinal": string;
+  "valorDesejado": number;
+  "dataCotacao": string;
+  "dataHoraCriacao": Date;
   "id": number;
-  "conversorId": number;
-  conversor: Conversor;
   constructor(data?: FilaConversorInterface) {
     Object.assign(this, data);
   }
@@ -53,24 +56,32 @@ export class FilaConversor implements FilaConversorInterface {
           name: 'posicao',
           type: 'number'
         },
+        "moedaOrigem": {
+          name: 'moedaOrigem',
+          type: 'string'
+        },
+        "moedaFinal": {
+          name: 'moedaFinal',
+          type: 'string'
+        },
+        "valorDesejado": {
+          name: 'valorDesejado',
+          type: 'number'
+        },
+        "dataCotacao": {
+          name: 'dataCotacao',
+          type: 'string'
+        },
+        "dataHoraCriacao": {
+          name: 'dataHoraCriacao',
+          type: 'Date'
+        },
         "id": {
           name: 'id',
           type: 'number'
         },
-        "conversorId": {
-          name: 'conversorId',
-          type: 'number'
-        },
       },
       relations: {
-        conversor: {
-          name: 'conversor',
-          type: 'Conversor',
-          model: 'Conversor',
-          relationType: 'belongsTo',
-                  keyFrom: 'conversorId',
-          keyTo: 'id'
-        },
       }
     }
   }

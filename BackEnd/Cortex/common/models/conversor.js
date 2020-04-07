@@ -61,12 +61,12 @@ module.exports = function (Conversor) {
         var sql;
         if (prioridade==0) {
             // sem prioridade, posicionada no final da fila de processamento
-            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
-                " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select max(posicao) + 1 from FilaConversor)) ";
+            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao, dataHoraCriacao) " +
+                " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select IFNULL(max(posicao)+1,0)  from FilaConversor)) , UTC_TIMESTAMP() ";
         } else {
             // com prioridade, posicionada no inicio da fila de processamento
-            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao) " +
-            " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select min(posicao) - 1 from FilaConversor)) ";
+            sql = " insert into FilaConversor (moedaOrigem, moedaFinal, valorDesejado, dataCotacao, posicao, dataHoraCriacao) " +
+            " select '" + moedaOrigem + "', '" + moedaFinal + "', " + valorDesejado + ", '" + dataCotacao + "' , ((select IFNULL(min(posicao)-1,0) from FilaConversor)), UTC_TIMESTAMP() ";
 
         }
 

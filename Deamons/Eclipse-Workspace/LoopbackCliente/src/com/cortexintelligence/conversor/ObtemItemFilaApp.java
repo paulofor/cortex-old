@@ -13,8 +13,8 @@ public class ObtemItemFilaApp {
 	private static Repository repositorio;
 	
 	// url do backend do sistema
-	//private static String acessoApi = "https://www.digicom.inf.br:21040/api";
-	private static String acessoApi = "https://localhost:21040/api";
+	private static String acessoApi = "https://www.digicom.inf.br:21040/api";
+	//private static String acessoApi = "https://localhost:21040/api";
 	
 	
 

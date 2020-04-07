@@ -20,15 +20,13 @@
     },
     "dataCotacao": {
       "type": "string"
+    },
+    "dataHoraCriacao": {
+      "type": "date"
     }
   },
   "validations": [],
-  "relations": {
-    "conversor": {
-      "type": "belongsTo",
-      "model": "Conversor"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

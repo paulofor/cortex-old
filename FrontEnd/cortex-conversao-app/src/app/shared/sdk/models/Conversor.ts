@@ -1,7 +1,4 @@
 /* tslint:disable */
-import {
-  FilaConversor
-} from '../index';
 
 declare var Object: any;
 export interface ConversorInterface {
@@ -13,7 +10,6 @@ export interface ConversorInterface {
   "totalPrecoVenda"?: number;
   "dataHoraCriacao"?: Date;
   "id"?: number;
-  filaConversor?: FilaConversor[];
 }
 
 export class Conversor implements ConversorInterface {
@@ -25,7 +21,6 @@ export class Conversor implements ConversorInterface {
   "totalPrecoVenda": number;
   "dataHoraCriacao": Date;
   "id": number;
-  filaConversor: FilaConversor[];
   constructor(data?: ConversorInterface) {
     Object.assign(this, data);
   }
@@ -93,14 +88,6 @@ export class Conversor implements ConversorInterface {
         },
       },
       relations: {
-        filaConversor: {
-          name: 'filaConversor',
-          type: 'FilaConversor[]',
-          model: 'FilaConversor',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'conversorId'
-        },
       }
     }
   }

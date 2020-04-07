@@ -25,13 +25,19 @@ import { SDKModels, LoopBackAuth, ConversorApi, SDKBrowserModule } from './share
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { DisplayFilaComponent } from './display-fila/display-fila.component';
+import { DisplayCacheComponent } from './display-cache/display-cache.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConversorMoedaBcComponent
+    ConversorMoedaBcComponent,
+    SideBarComponent,
+    DisplayFilaComponent,
+    DisplayCacheComponent
   ],
   imports: [
     BrowserModule,
@@ -43,11 +49,6 @@ registerLocaleData(localePt, 'pt-BR');
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    //NgxImgModule.forRoot(),
-    //FileDropModule,
-    //UploadModule,
-    //ImageUploadModule.forRoot(),
-    //NgDragDropModule.forRoot(),
     SDKBrowserModule.forRoot(),
     MatExpansionModule,
     MatListModule,

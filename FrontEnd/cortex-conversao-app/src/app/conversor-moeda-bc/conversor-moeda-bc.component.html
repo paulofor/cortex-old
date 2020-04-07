@@ -1,3 +1,4 @@
+<div style="margin: 20px;">
 <h2 mat-dialog-title>Conversão de Moedas</h2>
 
 <form class="example-full-width" (ngSubmit)="onSubmit()">
@@ -9,6 +10,7 @@
       <mat-select placeholder="Moeda Origem" #moedaOrigem [(ngModel)]="conversor.moedaOrigem" name="moedaOrigem">
         <mat-option value="USD">Dólar</mat-option>
         <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="BRL">Real</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -16,6 +18,7 @@
       <mat-select placeholder="Moeda Final" #moedaFinal [(ngModel)]="conversor.moedaFinal" name="moedaFinal">
         <mat-option value="USD">Dólar</mat-option>
         <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="BRL">Real</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -40,17 +43,34 @@
 
 </form>
 
-<table *ngIf="conversorResultado">
-  <tr>
-    <td>Valor para compra</td>
-    <td>{{conversorResultado.totalPrecoCompra  | number : '1.2-2' }}</td>
-  </tr>
-  <tr>
-    <td>Valor para venda</td>
-    <td>{{conversorResultado.totalPrecoVenda  | number : '1.2-2' }}</td>
-  </tr>
-  <tr>
-    <td>Usou cache</td>
-    <td>{{conversorResultado.cache}}</td>
-  </tr>
-</table>
+
+
+</div>
+
+<div class="container-fluid" *ngIf="conversorResultado">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h4 class="title">Resultado Conversão</h4>
+        </div>
+        <div class="content table-responsive table-full-width">
+          <table class="table table-hover table-striped">
+            <tr>
+              <td width="30%">Valor para compra</td>
+              <td>{{conversorResultado.totalPrecoCompra  | number : '1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Valor para venda</td>
+              <td>{{conversorResultado.totalPrecoVenda  | number : '1.2-2' }}</td>
+            </tr>
+            <tr>
+              <td>Usou cache</td>
+              <td>{{conversorResultado.cache}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
