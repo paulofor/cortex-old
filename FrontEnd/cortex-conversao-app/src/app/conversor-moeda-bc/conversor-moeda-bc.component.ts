@@ -14,6 +14,8 @@ export class ConversorMoedaBcComponent implements OnInit {
 
   conversorResultado : Conversor;
 
+  mensagemCotacao: String;
+
   constructor(private conversorSrv: ConversorApi) { }
 
   ngOnInit() {
@@ -22,6 +24,9 @@ export class ConversorMoedaBcComponent implements OnInit {
   }
 
   onSubmit() {
+    this.mensagemCotacao = null;
+    this.conversorResultado = null;
+    
     console.log('conversor', this.conversor);
     console.log('Data: ', this.dataParaCotacao);
     var dataFormatada = ("0" + this.dataParaCotacao.getDate()).substr(-2) + "-"
@@ -31,13 +36,18 @@ export class ConversorMoedaBcComponent implements OnInit {
     var moedaFinal = this.conversor.moedaFinal;
     var valorDesejado = this.conversor.valorDesejado;
     this.conversorSrv.realizaConversao(dataFormatada,moedaOrigem,moedaFinal,valorDesejado)
-      .subscribe((result) => {
-        console.log('ResultadoConsulta: ' , result);
-        this.conversorResultado = new Conversor();
-        this.conversorResultado.totalPrecoCompra = result.totalPrecoCompra;
-        this.conversorResultado.totalPrecoVenda = result.totalPrecoVenda;
-        this.conversorResultado['cache'] = result.cache;
-      })
+      .subscribe(
+        result => {
+          console.log('ResultadoConsulta: ' , result);
+          this.conversorResultado = new Conversor();
+          this.conversorResultado.totalPrecoCompra = result.totalPrecoCompra;
+          this.conversorResultado.totalPrecoVenda = result.totalPrecoVenda;
+          this.conversorResultado['cache'] = result.cache;
+        },
+        err => {
+          this.mensagemCotacao = "Sem cotação para esse dia";
+        }
+      );
   }
 
 

@@ -8,17 +8,33 @@
 
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Moeda Origem" #moedaOrigem [(ngModel)]="conversor.moedaOrigem" name="moedaOrigem">
-        <mat-option value="USD">Dólar</mat-option>
-        <mat-option value="EUR">Euro</mat-option>
         <mat-option value="BRL">Real</mat-option>
+        <mat-option value="AUD">Dólar australiano</mat-option>
+        <mat-option value="CAD">Dólar canadense</mat-option>
+        <mat-option value="CHF">Franco suíço</mat-option>
+        <mat-option value="DKK">Coroa dinamarquesa</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="GBP">Libra Esterlina</mat-option>
+        <mat-option value="JPY">Iene</mat-option>
+        <mat-option value="NOK">Coroa norueguesa</mat-option>
+        <mat-option value="SEK">Coroa sueca</mat-option>
+        <mat-option value="USD">Dólar dos Estados Unidos</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
       <mat-select placeholder="Moeda Final" #moedaFinal [(ngModel)]="conversor.moedaFinal" name="moedaFinal">
-        <mat-option value="USD">Dólar</mat-option>
-        <mat-option value="EUR">Euro</mat-option>
         <mat-option value="BRL">Real</mat-option>
+        <mat-option value="AUD">Dólar australiano</mat-option>
+        <mat-option value="CAD">Dólar canadense</mat-option>
+        <mat-option value="CHF">Franco suíço</mat-option>
+        <mat-option value="DKK">Coroa dinamarquesa</mat-option>
+        <mat-option value="EUR">Euro</mat-option>
+        <mat-option value="GBP">Libra Esterlina</mat-option>
+        <mat-option value="JPY">Iene</mat-option>
+        <mat-option value="NOK">Coroa norueguesa</mat-option>
+        <mat-option value="SEK">Coroa sueca</mat-option>
+        <mat-option value="USD">Dólar dos Estados Unidos</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -69,6 +85,18 @@
               <td>{{conversorResultado.cache}}</td>
             </tr>
           </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="mensagemCotacao">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="header">
+          <h5>Data Sem Cotação</h5>
         </div>
       </div>
     </div>

@@ -34,11 +34,13 @@ public class ObtemItemFilaApp {
 				
 				System.out.println("Valor Convertido Compra: " + conversor.getTotalPrecoCompra());
 				System.out.println("Valor Convertido Venda: " + conversor.getTotalPrecoVenda());
+				System.exit(0);
 			}
 
 			@Override
 			public void onError(Throwable t) {
 				t.printStackTrace();
+				System.exit(0);
 			}
 		});
 	}
